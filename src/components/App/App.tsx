@@ -90,7 +90,7 @@ function App() {
       ) : (
         <ErrorMessage images={images} query={query} />
       )}
-      {loading && <Loader />}
+      {loading && <Loader isLoading={true} />}
       {images.length > 0 && <LoadMoreBtn onClick={handllePage} />}
     </>
   );
