@@ -7,13 +7,14 @@ import Loader from "../Loader/Loader";
 import ImageModal from "../ImageModal/ImageModal";
 import { fetchImages } from "../../showImages";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
-
+import { MainImage } from "../../type";
+import { Modal } from "../ImageModal/ImageModal";
 function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuuery] = useState("");
+  const [images, setImages] = useState<MainImage[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuuery] = useState<string>("");
 
   useEffect(() => {
     if (query === "") {
@@ -38,7 +39,7 @@ function App() {
     getImages();
   }, [query, page]);
 
-  const handleSearch = async (newQuery) => {
+  const handleSearch = async (newQuery: string) => {
     setQuuery(newQuery);
     setPage(1);
     setImages([]);
@@ -52,9 +53,9 @@ function App() {
 
   // ==========================================Modal============================================================
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const openModal = (image) => {
+  const openModal = (image: Modal) => {
     setSelectedImage(image);
     setModalIsOpen(true);
   };

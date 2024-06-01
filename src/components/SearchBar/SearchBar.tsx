@@ -1,13 +1,20 @@
 import css from "./SearchBar.module.css";
 import { CiSearch } from "react-icons/ci";
-export default function SearchBar({ onSubmit, query, inputError }) {
-  const handleSubmit = (e) => {
+import { FormEvent } from "react";
+interface ISearch {
+  onSubmit: (nameImage: string) => void;
+  query: string;
+  inputError: () => void;
+}
+export default function SearchBar({ onSubmit, query, inputError }: ISearch) {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query === "") {
       inputError();
     }
-    const form = e.target;
-    const nameImage = form.elements.search.value;
+    const form = e.target as HTMLFormElement;
+    const nameImage = (form.elements.namedItem("search") as HTMLInputElement)
+      .value;
     onSubmit(nameImage);
     form.reset();
   };

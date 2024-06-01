@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
+
 const customStyles = {
   overlay: {
     position: "fixed",
@@ -21,8 +22,21 @@ const customStyles = {
     width: "900px",
   },
 };
-
-export default function ImageModal({ open, closeModal, selectedImage }) {
+export interface Modal {
+  open: boolean;
+  closeModal: () => void;
+  selectedImage: {
+    alt_description: string;
+    user: {
+      name: string;
+      instagram_username: string;
+    };
+    urls: {
+      regular: string;
+    };
+  };
+}
+export default function ImageModal({ open, closeModal, selectedImage }: Modal) {
   return (
     <>
       <div>

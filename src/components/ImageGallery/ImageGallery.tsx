@@ -1,6 +1,11 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
-export default function ImageGallery({ images, openModal }) {
+import { MainImage } from "../../type";
+interface IGallery{
+  images: MainImage[];
+  openModal:()=>void
+}
+export default function ImageGallery({ images, openModal }:IGallery) {
   return (
     <ul className={css.imageList}>
       {images.map((image) => {
