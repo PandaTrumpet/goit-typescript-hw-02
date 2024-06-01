@@ -1,0 +1,10 @@
+.imageCard {
+  width: 345px;
+  height: 250px;
+  transition: transform 300ms ease-in-out;
+  cursor: zoom-in;
+}
+
+.imageCard:hover {
+  transform: scale(1.05);
+}
