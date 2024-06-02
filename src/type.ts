@@ -3,5 +3,10 @@ export interface MainImage {
   alt_description: string;
   urls: {
     small: string;
+    regular: string;
+  };
+  user: {
+    name: string;
+    instagram_username: string;
   };
 }

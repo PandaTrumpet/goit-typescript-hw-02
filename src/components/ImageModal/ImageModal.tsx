@@ -1,14 +1,14 @@
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 
-const customStyles = {
+const customStyles: ReactModal.Styles = {
   overlay: {
     position: "fixed",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgb(60, 60, 60, 0.75)",
+    backgroundColor: "rgba(60, 60, 60, 0.75)",
   },
   content: {
     top: "50%",
@@ -22,7 +22,8 @@ const customStyles = {
     width: "900px",
   },
 };
-export interface Modal {
+
+export interface ModalProps {
   open: boolean;
   closeModal: () => void;
   selectedImage: {
@@ -34,9 +35,14 @@ export interface Modal {
     urls: {
       regular: string;
     };
-  };
+  } | null;
 }
-export default function ImageModal({ open, closeModal, selectedImage }: Modal) {
+
+export default function ImageModal({
+  open,
+  closeModal,
+  selectedImage,
+}: ModalProps) {
   return (
     <>
       <div>

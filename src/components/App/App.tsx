@@ -8,7 +8,7 @@ import ImageModal from "../ImageModal/ImageModal";
 import { fetchImages } from "../../showImages";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import { MainImage } from "../../type";
-import { Modal } from "../ImageModal/ImageModal";
+import { ModalProps } from "../ImageModal/ImageModal";
 function App() {
   const [images, setImages] = useState<MainImage[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,7 +24,7 @@ function App() {
       try {
         setLoading(true);
 
-        const data = await fetchImages(query, page);
+        const data = await fetchImages<MainImage[]>(query, page);
         setImages((prevImages) => {
           return [...prevImages, ...data];
         });
@@ -54,8 +54,8 @@ function App() {
   // ==========================================Modal============================================================
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const openModal = (image: Modal) => {
+  const [selectedImage, setSelectedImage] = useState<MainImage | null>(null);
+  const openModal = (image: MainImage | null) => {
     setSelectedImage(image);
     setModalIsOpen(true);
   };
@@ -79,16 +79,16 @@ function App() {
       {images.length > 0 ? (
         <>
           <ImageGallery images={images} openModal={openModal} />
-          <ImageModal
-            images={images}
-            open={modalIsOpen}
-            closeModal={closeModal}
-            selectedImage={selectedImage}
-            openModal={openModal}
-          />
+          {selectedImage && (
+            <ImageModal
+              open={modalIsOpen}
+              closeModal={closeModal}
+              selectedImage={selectedImage}
+            />
+          )}
         </>
       ) : (
-        <ErrorMessage images={images} query={query} />
+        <ErrorMessage />
       )}
       {loading && <Loader isLoading={true} />}
       {images.length > 0 && <LoadMoreBtn onClick={handllePage} />}
